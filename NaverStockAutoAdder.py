@@ -6,6 +6,9 @@ import time
 import pandas as pd
 from datetime import datetime
 from selenium.webdriver.common.by import By
+import random
+
+sleep_time = random.uniform(1, 2)
 
 
 # 크롬 디버거로 크롬 구동
@@ -26,27 +29,34 @@ except:
 
 driver.implicitly_wait(5)  # 웹 자원 로드를 위해 5초까지 기다림
 
+# CSV 파일 이름
+csv_file_name = 'common_08-18.csv'
+
 # CSV 파일 읽기
-df = pd.read_csv('TurtleMinervini_09-16.csv')
+df = pd.read_csv(csv_file_name)
 
-# 네이버 로그인 페이지 접속
-driver.get('https://nid.naver.com/')
-time.sleep(3)
+# 파일 이름에서 '.csv' 앞의 부분만 추출
+file_prefix = csv_file_name.split('.csv')[0]
 
-# 관심종목 등록을 위한 기본 설정
-current_date = datetime.now().strftime("%Y-%m-%d")
-final_string = f"{current_date} 추천 리스트"
+# 추출한 부분에 "추천 리스트"를 붙임
+final_string = f"{file_prefix} 추천 리스트"
+
+time.sleep(sleep_time)
+
 
 # 샘플 코드로 삼성전자(005930) 종목에 접근하여 관심종목에 등록
 driver.get('https://finance.naver.com/item/main.nhn?code=005930')
+time.sleep(sleep_time)
 driver.find_element(By.XPATH, '//*[@id="middle"]/div[1]/div[2]/p/a[1]').click()
+time.sleep(sleep_time)
 driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/p[1]/button').click()
-time.sleep(2)
+time.sleep(sleep_time)
 
 # 그룹명 입력
 input_field = driver.find_element(By.CSS_SELECTOR, 'input.input_txt')
 driver.execute_script(f"arguments[0].value = '{final_string}';", input_field)
-driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[1]/ul/li[4]/a[1]').click()
+time.sleep(sleep_time)
+driver.find_element_by_css_selector('a._btn_add_ok').click()
 
 # 종목을 순회하면서 관심종목에 등록
 for ticker in df['Ticker']:
@@ -58,15 +68,15 @@ for ticker in df['Ticker']:
 
     try:
         driver.find_element(By.XPATH, '//*[@id="middle"]/div[1]/div[2]/p/a[1]').click()
-        time.sleep(1)
+        time.sleep(sleep_time)
 
         # '관심종목 1' 그룹 선택
         driver.find_element(By.XPATH, f"//span[text()='{final_string}']").click()
-        time.sleep(1)
+        time.sleep(sleep_time)
         driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/p[2]/button[1]').click()
         print(f"Successfully added ticker: {ticker_str}")
 
     except Exception as e:
         print(f"Failed to add ticker: {ticker_str}, error: {e}")
 
-    time.sleep(2)
+time.sleep(sleep_time)
