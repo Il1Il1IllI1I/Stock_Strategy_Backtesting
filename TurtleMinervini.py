@@ -49,7 +49,7 @@ common_tickers_df['Market'] = common_tickers_df['Market'].replace({'KOSPI': '코
 
 end_time = datetime.datetime.now()
 current_date_str = datetime.datetime.now().strftime('%m-%d')
-filename = f"TurtleMinervini_{current_date_str}.csv"
+filename = f"TM_{current_date_str}.csv"
 
 common_tickers_df.to_csv(filename, index=False)
 

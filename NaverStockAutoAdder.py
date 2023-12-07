@@ -17,7 +17,7 @@ time.sleep(3)  # 크롬이 완전히 실행될 때까지 대기
 
 # 웹드라이버 설정
 chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
-driver_path = f'./{chrome_ver}/chromedriver.exe'
+driver_path = 'C:\\Users\\USER\\Downloads\\chromedriver_win32\\chromedriver.exe'
 option = Options()
 option.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
 
@@ -30,7 +30,7 @@ except:
 driver.implicitly_wait(5)  # 웹 자원 로드를 위해 5초까지 기다림
 
 # CSV 파일 이름
-csv_file_name = 'common_08-18.csv'
+csv_file_name = 'TM_11-04.csv'
 
 # CSV 파일 읽기
 df = pd.read_csv(csv_file_name)
@@ -39,7 +39,7 @@ df = pd.read_csv(csv_file_name)
 file_prefix = csv_file_name.split('.csv')[0]
 
 # 추출한 부분에 "추천 리스트"를 붙임
-final_string = f"{file_prefix} 추천 리스트"
+final_string = f"{file_prefix}"
 
 time.sleep(sleep_time)
 
