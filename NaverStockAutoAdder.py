@@ -30,11 +30,7 @@ except:
 driver.implicitly_wait(7)  # 웹 자원 로드를 위해 5초까지 기다림
 
 # CSV 파일 이름
-<<<<<<< HEAD
-csv_file_name = 'TM_11-04.csv'
-=======
 csv_file_name = 'TM_09-22.csv'
->>>>>>> f8be8f137afc5ae5d04bb5c03bd6603dbf08622d
 
 # CSV 파일 읽기
 df = pd.read_csv(csv_file_name)
