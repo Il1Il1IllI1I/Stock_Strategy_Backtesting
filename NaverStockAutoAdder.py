@@ -13,7 +13,7 @@ sleep_time = random.uniform(1, 2)
 
 # 크롬 디버거로 크롬 구동
 subprocess.Popen(r'C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\chrometemp"')
-time.sleep(3)  # 크롬이 완전히 실행될 때까지 대기
+time.sleep(5)  # 크롬이 완전히 실행될 때까지 대기
 
 # 웹드라이버 설정
 chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
@@ -27,10 +27,14 @@ except:
     chromedriver_autoinstaller.install(True)
     driver = webdriver.Chrome(driver_path, options=option)
 
-driver.implicitly_wait(5)  # 웹 자원 로드를 위해 5초까지 기다림
+driver.implicitly_wait(7)  # 웹 자원 로드를 위해 5초까지 기다림
 
 # CSV 파일 이름
+<<<<<<< HEAD
 csv_file_name = 'TM_11-04.csv'
+=======
+csv_file_name = 'TM_09-22.csv'
+>>>>>>> f8be8f137afc5ae5d04bb5c03bd6603dbf08622d
 
 # CSV 파일 읽기
 df = pd.read_csv(csv_file_name)
@@ -49,7 +53,7 @@ driver.get('https://finance.naver.com/item/main.nhn?code=005930')
 time.sleep(sleep_time)
 driver.find_element(By.XPATH, '//*[@id="middle"]/div[1]/div[2]/p/a[1]').click()
 time.sleep(sleep_time)
-driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/p[1]/button').click()
+driver.find_element(By.XPATH, '/html/body/div[5]/div[1]/p[1]/button').click()
 time.sleep(sleep_time)
 
 # 그룹명 입력
